@@ -1,0 +1,41 @@
+﻿@model FinancialProducts.Models.ProductViewModel
+
+@{
+    ViewData["Title"] = "金融商品詳情";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h3 class="card-title">@ViewData["Title"]</h3>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.No)</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.No)</dd>
+
+                        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.ProductName)</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.ProductName)</dd>
+
+                        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Price)</dt>
+                        <dd class="col-sm-8">@Model.Price.ToString("N2")</dd>
+
+                        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.FeeRatePercent)</dt>
+                        <dd class="col-sm-8">@Model.FeeRatePercent.ToString("N2")%</dd>
+                    </dl>
+
+                    <div class="d-flex justify-content-between mt-3">
+                        <a asp-action="Edit" asp-route-id="@Model.No" class="btn btn-warning">
+                            <i class="fa fa-edit"></i> 編輯
+                        </a>
+                        <a asp-action="Index" class="btn btn-secondary">
+                            <i class="fa fa-arrow-left"></i> 返回列表
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+﻿@model FinancialProducts.Models.LikeListViewModel
+
+@{
+    ViewData["Title"] = "編輯喜好金融商品";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header bg-warning">
+                    <h3 class="card-title">@ViewData["Title"]</h3>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Edit">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="SN" />
+                        <input type="hidden" asp-for="UserID" />
+
+                        <div class="mb-3">
+                            <label asp-for="UserID" class="form-label"></label>
+                            <select asp-items="ViewBag.Users" class="form-select" disabled>
+                                <option value="">-- 選擇使用者 --</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="ProductNo" class="form-label"></label>
+                            <select asp-for="ProductNo" asp-items="ViewBag.Products" class="form-select"></select>
+                            <span asp-validation-for="ProductNo" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="OrderQty" class="form-label"></label>
+                            <input asp-for="OrderQty" class="form-control" />
+                            <span asp-validation-for="OrderQty" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Account" class="form-label"></label>
+                            <input asp-for="Account" class="form-control" />
+                            <span asp-validation-for="Account" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <button type="submit" class="btn btn-warning">
+                                <i class="fa fa-save"></i> 更新
+                            </button>
+                            <a asp-action="Index" asp-route-userId="@Model.UserID" class="btn btn-secondary">
+                                <i class="fa fa-arrow-left"></i> 返回列表
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

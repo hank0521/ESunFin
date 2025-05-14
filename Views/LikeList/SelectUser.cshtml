@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "選擇使用者";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title">@ViewData["Title"]</h3>
+                </div>
+                <div class="card-body">
+                    <p>請選擇要查看其喜好金融商品的使用者：</p>
+
+                    <form asp-action="SelectUser" method="post">
+                        <div class="mb-3">
+                            <label for="userId" class="form-label">使用者</label>
+                            <select id="userId" name="userId" class="form-select" asp-items="ViewBag.Users">
+                                <option value="">-- 請選擇使用者 --</option>
+                            </select>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa fa-check"></i> 確認
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

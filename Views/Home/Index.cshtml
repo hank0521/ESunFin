@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "首頁";
+}
+
+<div class="container mt-4">
+    <div class="jumbotron bg-light p-4 rounded">
+        <h1 class="display-4">金融商品管理系統</h1>
+        <p class="lead">歡迎使用金融商品管理系統，您可以在這裡管理您喜好的金融商品。</p>
+        <hr class="my-4">
+        <p>選擇您要進行的操作：</p>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h3 class="card-title">金融商品管理</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>管理系統中的金融商品資訊。</p>
+                        <a asp-controller="Product" asp-action="Index" class="btn btn-primary">
+                            <i class="fa fa-list"></i> 進入金融商品列表
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="card">
+                    <div class="card-header bg-success text-white">
+                        <h3 class="card-title">喜好金融商品管理</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>管理您喜好的金融商品清單。</p>
+                        <a asp-controller="LikeList" asp-action="Index" class="btn btn-success">
+                            <i class="fa fa-heart"></i> 進入喜好金融商品
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

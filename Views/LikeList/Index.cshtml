@@ -1,0 +1,104 @@
+﻿@model IEnumerable<FinancialProducts.Models.LikeListItem>
+
+@{
+    ViewData["Title"] = "喜好金融商品清單";
+    var user = ViewBag.User as FinancialProducts.Models.User;
+}
+
+<div class="container mt-4">
+    <h1>@ViewData["Title"]</h1>
+
+    @if (user != null)
+    {
+        <div class="alert alert-info">
+            <h4>使用者資訊</h4>
+            <dl class="row mb-0">
+                <dt class="col-sm-2">使用者ID:</dt>
+                <dd class="col-sm-4">@user.UserID</dd>
+                <dt class="col-sm-2">使用者名稱:</dt>
+                <dd class="col-sm-4">@user.UserName</dd>
+                <dt class="col-sm-2">電子郵件:</dt>
+                <dd class="col-sm-4">@user.Email</dd>
+                <dt class="col-sm-2">帳號:</dt>
+                <dd class="col-sm-4">@user.Account</dd>
+            </dl>
+        </div>
+
+        <div class="mb-3">
+            <a asp-action="Create" asp-route-userId="@user.UserID" class="btn btn-primary">
+                <i class="fa fa-plus"></i> 新增喜好金融商品
+            </a>
+            <a asp-action="Index" class="btn btn-outline-secondary">
+                <i class="fa fa-users"></i> 切換使用者
+            </a>
+        </div>
+
+        @if (Model != null && Model.Any())
+        {
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>序號</th>
+                                    <th>產品名稱</th>
+                                    <th>產品價格</th>
+                                    <th>手續費率</th>
+                                    <th>購買數量</th>
+                                    <th>扣款帳號</th>
+                                    <th>總手續費</th>
+                                    <th>預計扣款總金額</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.SN</td>
+                                        <td>@item.ProductName</td>
+                                        <td>@item.Price.ToString("N2")</td>
+                                        <td>@(item.FeeRate * 100)%</td>
+                                        <td>@item.OrderQty</td>
+                                        <td>@item.Account</td>
+                                        <td>@item.TotalFee.ToString("N2")</td>
+                                        <td>@item.TotalAmount.ToString("N2")</td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <a asp-action="Edit" asp-route-id="@item.SN" class="btn btn-sm btn-warning">
+                                                    <i class="fa fa-edit"></i> 編輯
+                                                </a>
+                                                <a asp-action="Details" asp-route-id="@item.SN" class="btn btn-sm btn-info">
+                                                    <i class="fa fa-info-circle"></i> 詳情
+                                                </a>
+                                                <a asp-action="Delete" asp-route-id="@item.SN" class="btn btn-sm btn-danger">
+                                                    <i class="fa fa-trash"></i> 刪除
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr class="table-primary">
+                                    <th colspan="6" class="text-end">總計：</th>
+                                    <th>@Model.Sum(i => i.TotalFee).ToString("N2")</th>
+                                    <th>@Model.Sum(i => i.TotalAmount).ToString("N2")</th>
+                                    <th></th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-warning">
+                <h4>無喜好金融商品</h4>
+                <p>目前沒有任何喜好金融商品記錄。</p>
+            </div>
+        }
+    }
+</div>

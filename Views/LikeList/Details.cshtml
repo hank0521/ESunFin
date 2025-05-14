@@ -1,0 +1,68 @@
+﻿@model FinancialProducts.Models.LikeListViewModel
+
+@{
+    ViewData["Title"] = "喜好金融商品詳情";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h3 class="card-title">@ViewData["Title"]</h3>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-4">序號</dt>
+                        <dd class="col-sm-8">@Model.SN</dd>
+
+                        <dt class="col-sm-4">使用者ID</dt>
+                        <dd class="col-sm-8">@Model.UserID</dd>
+
+                        @if (!string.IsNullOrEmpty(Model.UserName))
+                        {
+                            <dt class="col-sm-4">使用者名稱</dt>
+                            <dd class="col-sm-8">@Model.UserName</dd>
+                        }
+
+                        @if (!string.IsNullOrEmpty(Model.Email))
+                        {
+                            <dt class="col-sm-4">電子郵件</dt>
+                            <dd class="col-sm-8">@Model.Email</dd>
+                        }
+
+                        <dt class="col-sm-4">產品名稱</dt>
+                        <dd class="col-sm-8">@Model.ProductName</dd>
+
+                        <dt class="col-sm-4">產品價格</dt>
+                        <dd class="col-sm-8">@Model.Price.ToString("N2")</dd>
+
+                        <dt class="col-sm-4">手續費率</dt>
+                        <dd class="col-sm-8">@(Model.FeeRate * 100)%</dd>
+
+                        <dt class="col-sm-4">購買數量</dt>
+                        <dd class="col-sm-8">@Model.OrderQty</dd>
+
+                        <dt class="col-sm-4">扣款帳號</dt>
+                        <dd class="col-sm-8">@Model.Account</dd>
+
+                        <dt class="col-sm-4">總手續費</dt>
+                        <dd class="col-sm-8">@Model.TotalFee.ToString("N2")</dd>
+
+                        <dt class="col-sm-4">預計扣款總金額</dt>
+                        <dd class="col-sm-8">@Model.TotalAmount.ToString("N2")</dd>
+                    </dl>
+
+                    <div class="d-flex justify-content-between mt-3">
+                        <a asp-action="Edit" asp-route-id="@Model.SN" class="btn btn-warning">
+                            <i class="fa fa-edit"></i> 編輯
+                        </a>
+                        <a asp-action="Index" asp-route-userId="@Model.UserID" class="btn btn-secondary">
+                            <i class="fa fa-arrow-left"></i> 返回列表
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

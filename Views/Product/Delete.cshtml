@@ -1,0 +1,49 @@
+﻿@model FinancialProducts.Models.ProductViewModel
+
+@{
+    ViewData["Title"] = "刪除金融商品";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header bg-danger text-white">
+                    <h3 class="card-title">@ViewData["Title"]</h3>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-warning">
+                        <h4>您確定要刪除這個金融商品嗎？</h4>
+                        <p>此操作無法撤銷。</p>
+                    </div>
+
+                    <dl class="row">
+                        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.No)</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.No)</dd>
+
+                        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.ProductName)</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.ProductName)</dd>
+
+                        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Price)</dt>
+                        <dd class="col-sm-8">@Model.Price.ToString("N2")</dd>
+
+                        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.FeeRatePercent)</dt>
+                        <dd class="col-sm-8">@Model.FeeRatePercent.ToString("N2")%</dd>
+                    </dl>
+
+                    <form asp-action="Delete">
+                        <div class="d-flex justify-content-between mt-3">
+                            <input type="hidden" asp-for="No" />
+                            <button type="submit" class="btn btn-danger">
+                                <i class="fa fa-trash"></i> 確認刪除
+                            </button>
+                            <a asp-action="Index" class="btn btn-secondary">
+                                <i class="fa fa-arrow-left"></i> 返回列表
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
